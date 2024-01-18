@@ -5,7 +5,24 @@
 
 <section class="signup-form">
     <h2>Sign up</h2>
-<form action="includes/signup.inc.php" method="post">
+<form action="includes/signup.inc.php" name='signup' method="post">
+    <?php
+        session_start();
+
+        if(isset($_SESSION['registrationError']) && 
+           $_SESSION['registrationError']) {
+           
+            echo '<label class="error">' . $_SESSION['registrationError'] . '</label>';
+            $_SESSION['registrationError'] = '';
+        }
+
+        // if(isset($_SESSION['registrationSuccess']) && 
+        //    $_SESSION['registrationSuccess']) {
+           
+        //     echo '<label class="success">' . $_SESSION['registrationSuccess'] . '</label>';
+        //     $_SESSION['registrationSuccess'] = '';
+        // }
+    ?>
     <div>
     <input type="text" name="name" placeholder="full name">
     </div>

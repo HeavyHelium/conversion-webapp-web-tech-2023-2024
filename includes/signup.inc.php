@@ -1,19 +1,54 @@
 <?php
 
-include_once "../classes/signup.classes.php";
-include_once "../classes/signup-contr.classes.php";
+    require_once './testInputUtility.php';
+    require_once '../classes/db_handler.php';
+    require_once '../classes/user.php';
 
+    session_start();
+    $name = testInput($_POST['name']);
+    $username = testInput($_POST['username']);
+    $email = testInput($_POST['email']);
+    $pwd = testInput($_POST['pwd']);
+    $pwdrepeat = testInput($_POST['pwdrepeat']);
 
-if(isset($_POST["submit"])) {
-    // Get the data
-    $uid = $_POST["submit"];
-    $pwd = $_POST["pwd"];
-    $pwdrepeat = $_POST["pwdrepeat"];
-    $email = $_POST["email"];
+    if(!$name || !$username || !$email || !$pwd || !$pwdrepeat) {
+        $_SESSION['registrationError'] = "Всички полета са задължителни!";
+        header('Location: ../signup.php');
+    } else {
+        if(strlen($name) > 200) {
+            $_SESSION['registrationError'] = "Името трябва да се състои от най-много 200 символа!";
+            header('Location: ../signup.php');
+        } else if(strlen($username) > 200) {
+            $_SESSION['registrationError'] = "Потребителското име се състои от най-много 200 символа!";
+            header('Location: ../signup.php');
+        } else if(strlen($email) > 200) {
+            $_SESSION['registrationError'] = "Имейлът се състои от най-много 200 символа!";
+            header('Location: ../signup.php');
+        } else if($pwd != $pwdrepeat) {
+            $_SESSION['registrationError'] = "Повторно въведената парола не съвпада!";
+            header('Location: ../signup.php');
+        } else {
+            $user = new User($username, $name, $pwd, $email);
+            $result = $user->exists();
 
-    $signup = new SignupContr($uid, $pwd, 
-                              $pwdRepeat, $email);
-    // Instantiate SignupContr class
-    // Running error handler and user signup
-    // going back to front page
-}
+            if($result["success"]) {
+                if($result["data"]) {
+                    $_SESSION['registrationError'] = 'Съществува потребител с въведеното потребителско име / парола.';
+                    header('Location: ../signup.php');
+                } else {
+                    if(!$user->createUser()) {
+                        $_SESSION['registrationError'] = 'Възникна неочакван проблем...';
+                        header('Location: ../signup.php');
+                    } else {
+                        // $_SESSION['registrationSuccess'] = 'Успешно се регистрирахте';
+                        session_destroy();
+                        header('Location: ../login.php');
+                    }
+                }
+            } else {
+                $_SESSION['registrationError'] = 'Възникна неочакван проблем...';
+                header('Location: ../signup.php');
+            }
+        }
+    }
+?>
