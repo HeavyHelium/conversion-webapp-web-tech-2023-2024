@@ -5,7 +5,7 @@
 
 <section class="signup-form">
     <h2>Sign up</h2>
-<form action="includes/signup.inc.php" name='signup' method="post">
+<form action="../includes/signup.inc.php" name='signup' method="post">
     <?php
         session_start();
 

@@ -10,7 +10,7 @@ class User {
     private $email;
     private $database;
     
-    public function __construct($username, $name, $pwd, $email) {
+    public function __construct($username="", $name="", $pwd="", $email="") {
         $this->username = $username;
         $this->name = $name;
         $this->pwd = password_hash($pwd, PASSWORD_DEFAULT);
@@ -33,6 +33,21 @@ class User {
             }
         } else {
             return $result;
+        }
+    }
+
+    public function selectAreasQuery() {
+        try {
+            $sql = "SELECT * FROM ProfileHistory WHERE username=:username ORDER BY version DESC LIMIT 1;";
+            $stmt = $this->database->getConnection()->prepare($sql); 
+            $stmt->execute(["username" => $this->username]);
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+
+            return ["success" => true, "data" => $data];
+        } catch(PDOException $e) {
+            return ["success" => false, "error" => $e->getMessage()];
         }
     }
 
@@ -66,10 +81,22 @@ class User {
     }
 
     public function createUser() {
-        $result = $this->insertUserQuery(["username" => $this->username,
-                                          "name" => $this->name, 
-                                          "password" => $this->pwd, 
-                                          "email" => $this->email]);
+        try {
+            $result = $this->insertUserQuery(["username" => $this->username,
+                                             "name" => $this->name, 
+                                             "password" => $this->pwd, 
+                                             "email" => $this->email]);
+            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version) VALUES(:username, 1, 2, 3, (NOW()))";
+            $stmt = $this->database->getConnection()->prepare($sql);
+            $stmt->execute(["username" => $this->username]);
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+            $this->database->getConnection()->rollBack();
+            return ["success" => false, 
+                    "error" => "Connection failed: " . $e->getMessage()];
+        }
+        
+        
 
         return $result;    
     }

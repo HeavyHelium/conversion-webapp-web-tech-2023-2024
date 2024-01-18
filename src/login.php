@@ -5,7 +5,7 @@
 
 <section class="signup-form">
     <h2>Log in</h2>
-<form action="includes/login.inc.php" method="post">
+<form action="../includes/login.inc.php" method="post">
     <?php
         session_start();
 
@@ -14,6 +14,7 @@
            
             echo '<label class="error">' . $_SESSION['loginError'] . '</label>';
             $_SESSION['loginError'] = '';
+            
         }
     ?>
     <div>

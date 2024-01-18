@@ -13,41 +13,41 @@
 
     if(!$name || !$username || !$email || !$pwd || !$pwdrepeat) {
         $_SESSION['registrationError'] = "Всички полета са задължителни!";
-        header('Location: ../signup.php');
+        header('Location: ../src/signup.php');
     } else {
         if(strlen($name) > 200) {
             $_SESSION['registrationError'] = "Името трябва да се състои от най-много 200 символа!";
-            header('Location: ../signup.php');
+            header('Location: ../src/signup.php');
         } else if(strlen($username) > 200) {
             $_SESSION['registrationError'] = "Потребителското име се състои от най-много 200 символа!";
-            header('Location: ../signup.php');
+            header('Location: ../src/signup.php');
         } else if(strlen($email) > 200) {
             $_SESSION['registrationError'] = "Имейлът се състои от най-много 200 символа!";
-            header('Location: ../signup.php');
+            header('Location: ../src/signup.php');
         } else if($pwd != $pwdrepeat) {
             $_SESSION['registrationError'] = "Повторно въведената парола не съвпада!";
-            header('Location: ../signup.php');
+            header('Location: ../src/signup.php');
         } else {
             $user = new User($username, $name, $pwd, $email);
             $result = $user->exists();
 
             if($result["success"]) {
                 if($result["data"]) {
-                    $_SESSION['registrationError'] = 'Съществува потребител с въведеното потребителско име / парола.';
-                    header('Location: ../signup.php');
+                    $_SESSION['registrationError'] = 'Съществува потребител с въведеното потребителско име.';
+                    header('Location: ../src/signup.php');
                 } else {
                     if(!$user->createUser()) {
                         $_SESSION['registrationError'] = 'Възникна неочакван проблем...';
-                        header('Location: ../signup.php');
+                        header('Location: ../src/signup.php');
                     } else {
                         // $_SESSION['registrationSuccess'] = 'Успешно се регистрирахте';
                         session_destroy();
-                        header('Location: ../login.php');
+                        header('Location: ../src/login.php');
                     }
                 }
             } else {
                 $_SESSION['registrationError'] = 'Възникна неочакван проблем...';
-                header('Location: ../signup.php');
+                header('Location: ../src/signup.php');
             }
         }
     }

@@ -5,7 +5,6 @@ class Dbh {
 
     public function __construct() {
         $config = parse_ini_file('../config/config.ini', true);
-
         $host = $config['db']['host'];
         $db = $config['db']['db_name'];
         $user = $config['db']['user'];
@@ -20,7 +19,6 @@ class Dbh {
         }
     }
 
-
     public function getConnection() {
         return $this->connection;
     }
@@ -28,8 +26,6 @@ class Dbh {
     public function closeConnection() {
         $this->connection = null;
     }
-
-    // public function getConnection
 
 }
 

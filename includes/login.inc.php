@@ -10,13 +10,13 @@
 
     if(!$name && !$pwd) {
         $_SESSION['loginError'] = "Въведете потребителско име и парола!";
-        header('Location: ../login.php');
+        header('Location: ../src/login.php');
     } else if(!$username) {
         $_SESSION['loginError'] = "Въведете потребителско име!";
-        header('Location: ../login.php');
+        header('Location: ../src/login.php');
     } else if(!$pwd) {
         $_SESSION['loginError'] = "Въведете парола!";
-        header('Location: ../login.php');
+        header('Location: ../src/login.php');
     } else {
         $user = new User($username, $name, $pwd, $email);
         $result = $user->exists();
@@ -27,18 +27,21 @@
                 
                 if(!password_verify($pwd, $result["data"]["passwd"])) {
                     $_SESSION['loginError'] = "Грешна парола!";
-                    header('Location: ../login.php');
+                    header('Location: ../src/login.php');
                 } else {
                     $_SESSION['name'] = $result["data"]["name"]; 
-                    header('Location: ../profile.php');
+                    $_SESSION['username'] = $result["data"]["username"];
+                    $_SESSION['textAreas'] = $user->selectAreasQuery()['data'];
+                    
+                    header('Location: ../src/profile.php');
                 }
             } else {
                 $_SESSION['loginError'] = "Грешни данни!";
-                header('Location: ../login.php');
+                header('Location: ../src/login.php');
             }
         } else {
              $_SESSION['loginError'] = "Възникна неочаквана грешка!";
-             header('Location: ../login.php');
+             header('Location: ../src/login.php');
         }
     }
 ?>
