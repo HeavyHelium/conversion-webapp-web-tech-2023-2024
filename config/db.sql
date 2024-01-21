@@ -9,12 +9,12 @@ CREATE TABLE users (
 
 ----------------------------------------------------------
 
+
 CREATE TABLE ProfileHistory (
   username varchar(200) NOT NULL,
   inputField int(11) DEFAULT NULL,
   configField int(11) DEFAULT NULL,
   outputField int(11) DEFAULT NULL,
   version datetime NOT NULL,
-  PRIMARY KEY(username, version),
-  FOREIGN KEY (username) REFERENCES users(username)
+  conversionType varchar(50) DEFAULT NULL CHECK (conversionType in ('json2json','json2properties','properties2json','properties2properties'))
 );

@@ -64,6 +64,22 @@ class User {
         }
     }
 
+    public function historyUserQuery() {
+        try {
+            $sql = "SELECT * FROM ProfileHistory WHERE username=:username ORDER BY version DESC";
+            $stmt = $this->database->getConnection()->prepare($sql); 
+            $stmt->execute(["username" => $this->username]);
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+
+            return ["success" => true, "data" => $data];
+        } catch(PDOException $e) {
+            return ["success" => false, "error" => $e->getMessage()];
+        }
+    }
+
+
     public function insertUserQuery($data) {
         try {
             $sql = "INSERT INTO users(username, name, email, passwd) VALUES(:username, :name, :email, :password)";
@@ -86,7 +102,7 @@ class User {
                                              "name" => $this->name, 
                                              "password" => $this->pwd, 
                                              "email" => $this->email]);
-            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version) VALUES(:username, 1, 2, 3, (NOW()))";
+            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version) VALUES(:username, NULL, 2, NULL, (NOW()))";
             $stmt = $this->database->getConnection()->prepare($sql);
             $stmt->execute(["username" => $this->username]);
         } catch(PDOException $e) {
@@ -95,8 +111,6 @@ class User {
             return ["success" => false, 
                     "error" => "Connection failed: " . $e->getMessage()];
         }
-        
-        
 
         return $result;    
     }

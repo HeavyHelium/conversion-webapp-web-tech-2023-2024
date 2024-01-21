@@ -20,6 +20,10 @@ nav {
     align-items: center;
 }
 
+i {
+    font-style: italic;
+}
+
 
 nav img {
     height: 80px;
@@ -130,4 +134,25 @@ button:hover {
 .success {
     color: green;
     font-size: 1vw;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    color: white;
+    background-color: #333;
 }

@@ -15,11 +15,15 @@
         <div class="wrapper">
             <a href="../index.php"><img src="../images/logo.png" alt="logo"></a>
            <?php
-            echo('<ul><li>' . 'Logged as ' . $_SESSION['name'] . '</li></ul>');
+            echo('<ul><li>' . 'Logged as <i>' . $_SESSION['name'] . '</i></li></ul>');
             ?>
             <ul>
+                <li><a href="../src/profile.php"><strong>Converter</strong></a></li>
+                <li><a href="../src/profile_history.php"><strong>Conversion History</strong></a></li>
                 <li><a href="../includes/logout.inc.php"><strong>Log out</strong></a></li>
+                
             </ul>
+            
         </div>
     </nav>
 
