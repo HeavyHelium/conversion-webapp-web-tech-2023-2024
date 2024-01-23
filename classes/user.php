@@ -115,6 +115,29 @@ class User {
         return $result;    
     }
 
+    public function insertConversionHistory($inputField,
+                                            $outputField, 
+                                            $configField, 
+                                            $conversionType, 
+                                            $comment) {
+        try {
+            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version, comment, conversiontype) VALUES(:username, :inputfield, :configfield, :outputfield, (NOW()), :comment, :conversiontype)";
+            $stmt = $this->database->getConnection()->prepare($sql);
+            $stmt->execute([ "username" => $this->username, 
+                             "inputfield" => $inputField,
+                             "outputfield" => $outputField,
+                             "configfield" => $configField,
+                             "conversiontype" => $conversionType,
+                             "comment" => $comment]);
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+            $this->database->getConnection()->rollBack();
+            return ["success" => false, 
+                    "error" => "Connection failed: " . $e->getMessage()];
+        }
+        return ["success" => true];
+    }
+
     public function __destruct() {
         $this->database->closeConnection();
     }

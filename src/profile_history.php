@@ -9,7 +9,7 @@ $user = new User($_SESSION["username"]);
 
 $profile_data = $user->historyUserQuery();
 
-$columns = ["inputField", "configField", "version", 
+$columns = ["inputField", "configField", "outputField", "version", 
             "conversionType", "comment"];
 
 if(!$profile_data["success"]) {

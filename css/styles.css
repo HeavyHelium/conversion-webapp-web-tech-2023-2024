@@ -131,6 +131,11 @@ button:hover {
     font-size: 1vw;
 }
 
+.warning {
+    color: blueviolet;
+    font-size: 1vw;
+}
+
 .success {
     color: green;
     font-size: 1vw;
@@ -155,4 +160,31 @@ th, td {
 th {
     color: white;
     background-color: #333;
+}
+
+
+/* Set the width for specific columns */
+th:nth-child(4),
+td:nth-child(4) {
+    width: 150px;
+    /* Adjust the width as needed */
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 150px;
+    /* Adjust the width as needed */
+}
+
+/* Add other styles as needed */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
 }
