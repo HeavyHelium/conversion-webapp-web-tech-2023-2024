@@ -77,6 +77,7 @@ if(!isset($_POST[$configArea]) || strlen($_POST[$configArea]) == 0) {
                 $_SESSION["conversionType"] = 'properties2json';
             }
         } else {
+            $_SESSION["output-converted"] = $area_enc[$in];
             $_SESSION["conversionType"] = $input_format . "2" . $input_format;
         }
         // var_dump($area_names_rev[$out]);
