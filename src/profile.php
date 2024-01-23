@@ -88,6 +88,9 @@ function clearConvData() {
                 clearConvData();
             }
             ?></textarea>
+        <!-- <label class="upload" for="upload1">Load file</label> -->
+        <input id="upload1" type="file" name="uploadArea1">
+
 
         <label for="textArea2">Area 2: <?php echo $area_2?><?php ?></label>
         <textarea id="textArea2" rows="4" name="textArea2" cols="50" placeholder="<?php echo $area_2_placeholder?>"><?php
@@ -98,6 +101,8 @@ function clearConvData() {
             clearConvData();
         }
         ?></textarea>
+        <!-- <label class="upload" for="upload2">Load file</label> -->
+        <input id="upload2" type="file" name="uploadArea2">
 
         <label for="textArea3">Area 3: <?php echo $area_3?></label>
         <textarea id="textArea3" rows="4" name="textArea3" cols="50" placeholder="<?php echo $area_3_placeholder?>"><?php
@@ -109,12 +114,12 @@ function clearConvData() {
                 clearConvData();
             }?></textarea>
 
+        <!-- <label class="upload" for="upload3">Load file</label> -->
+        <input id="upload3" type="file" name="uploadArea3">
+
         <label for="textArea4">Comment</label>
         <textarea id="textArea4" rows="4" cols="50" name="commentArea" placeholder="...any comment on the coversion"></textarea>
 
-        <div></div>
-
-        <input type="file" id="uploadButton" accept=".properties, .json">
 
         <div></div>
 
@@ -133,8 +138,10 @@ function clearConvData() {
 
         <button type="submit" name="submit">Convert</button>
     </form>
-</div>
     
+</div>
+
+
 
 <?php
 
