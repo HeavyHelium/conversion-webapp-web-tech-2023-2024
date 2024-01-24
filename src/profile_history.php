@@ -36,7 +36,7 @@ if(!$profile_data["success"]) {
             }
         }
 
-        echo "<td><input type='submit' value='View Output'></td>";
+        echo "<td><input class='button-view' type='submit' value='View Output'></td>";
         echo "</tr>";
         echo "</form>";
     }
