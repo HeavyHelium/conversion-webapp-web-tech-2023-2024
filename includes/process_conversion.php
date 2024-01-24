@@ -108,7 +108,8 @@ if(!isset($_POST[$configArea]) || strlen($_POST[$configArea]) == 0) {
                                                $areas_nums[$_SESSION['output']], 
                                                $areas_nums[$_SESSION['configArea']],
                                                $_SESSION["conversionType"], 
-                                               $_SESSION["comment"]);
+                                               $_SESSION["comment"], 
+                                               $_SESSION["output-converted"]);
             header("Location: ../src/profile.php");
         }
         

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Време на генериране: 23 яну 2024 в 19:18
+-- Време на генериране: 24 яну 2024 в 11:26
 -- Версия на сървъра: 10.4.28-MariaDB
 -- Версия на PHP: 8.2.4
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- База данни: `web-conv`
 --
-CREATE DATABASE IF NOT EXISTS `web-conv` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `web-conv`;
 
 -- --------------------------------------------------------
 
@@ -36,7 +34,8 @@ CREATE TABLE `ProfileHistory` (
   `outputField` int(11) DEFAULT NULL,
   `version` datetime NOT NULL,
   `conversionType` varchar(50) DEFAULT NULL CHECK (`conversionType` in ('json2json','json2properties','properties2json','properties2properties')),
-  `comment` varchar(500) DEFAULT NULL
+  `comment` varchar(500) DEFAULT NULL,
+  `output` mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

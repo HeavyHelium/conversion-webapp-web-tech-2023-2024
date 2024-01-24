@@ -119,16 +119,18 @@ class User {
                                             $outputField, 
                                             $configField, 
                                             $conversionType, 
-                                            $comment) {
+                                            $comment, 
+                                            $output) {
         try {
-            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version, comment, conversiontype) VALUES(:username, :inputfield, :configfield, :outputfield, (NOW()), :comment, :conversiontype)";
+            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version, comment, conversiontype, output) VALUES(:username, :inputfield, :configfield, :outputfield, (NOW()), :comment, :conversiontype, :output)";
             $stmt = $this->database->getConnection()->prepare($sql);
             $stmt->execute([ "username" => $this->username, 
                              "inputfield" => $inputField,
                              "outputfield" => $outputField,
                              "configfield" => $configField,
                              "conversiontype" => $conversionType,
-                             "comment" => $comment]);
+                             "comment" => $comment,
+                             "output" => $output]);
         } catch(PDOException $e) {
             echo $e->getMessage();
             $this->database->getConnection()->rollBack();
@@ -136,6 +138,23 @@ class User {
                     "error" => "Connection failed: " . $e->getMessage()];
         }
         return ["success" => true];
+    }
+
+    public function selectConversionHistory($version) {
+        try {
+            $sql = "SELECT output FROM ProfileHistory WHERE version = :version AND username = :username";
+            $stmt = $this->database->getConnection()->prepare($sql);
+            $stmt->execute([ "username" => $this->username, 
+                             "version" => $version]);
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ["success" => true, "data" => $data];
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+            $this->database->getConnection()->rollBack();
+            return ["success" => false, 
+                    "error" => "Connection failed: " . $e->getMessage()];
+        }
     }
 
     public function __destruct() {

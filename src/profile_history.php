@@ -10,12 +10,13 @@ $user = new User($_SESSION["username"]);
 $profile_data = $user->historyUserQuery();
 
 $columns = ["inputField", "configField", "outputField", "version", 
-            "conversionType", "comment"];
+            "conversionType", "comment", "output"];
 
 if(!$profile_data["success"]) {
     header("Location: ./profile.php");
 } else {
     $resultArray = $profile_data["data"];
+     
     echo "<table>";
 
     echo "<tr>";
@@ -24,16 +25,24 @@ if(!$profile_data["success"]) {
     }
     echo "</tr>";
 
-
     foreach ($resultArray as $row) {
+        echo "<form method='post' action='./view_output.php'>";
         echo "<tr>";
         foreach ($columns as $header) {
-            echo "<td>" . $row[$header] . "</td>";
+            if ($header == "output") {
+                echo "<input type='hidden' name='version' value='" . $row['version'] . "' />";
+            } else {
+                echo "<td>" . $row[$header] . "</td>";
+            }
         }
+
+        echo "<td><input type='submit' value='View Output'></td>";
         echo "</tr>";
+        echo "</form>";
     }
 
     echo "</table>";
+
 }
 
 require_once("./footer.php");
