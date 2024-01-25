@@ -207,26 +207,14 @@ th {
 }
 
 
-/* Set the width for specific columns */
+
 th:nth-child(4),
 td:nth-child(4) {
     width: 150px;
-    /* Adjust the width as needed */
+
 }
 
-th:nth-child(5),
-td:nth-child(5) {
-    width: 150px;
-    /* Adjust the width as needed */
-}
 
-th:nth-child(7),
-td:nth-child(7) {
-    width: 60px;
-    /* Adjust the width as needed */
-}
-
-/* Add other styles as needed */
 table {
     border-collapse: collapse;
     width: 100%;

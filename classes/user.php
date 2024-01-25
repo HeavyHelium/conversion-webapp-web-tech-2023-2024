@@ -120,9 +120,11 @@ class User {
                                             $configField, 
                                             $conversionType, 
                                             $comment, 
-                                            $output) {
+                                            $output, 
+                                            $input, 
+                                            $config) {
         try {
-            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version, comment, conversiontype, output) VALUES(:username, :inputfield, :configfield, :outputfield, (NOW()), :comment, :conversiontype, :output)";
+            $sql = "INSERT INTO ProfileHistory(username, inputfield, configfield, outputfield, version, comment, conversiontype, output, input, config) VALUES(:username, :inputfield, :configfield, :outputfield, (NOW()), :comment, :conversiontype, :output, :input, :config)";
             $stmt = $this->database->getConnection()->prepare($sql);
             $stmt->execute([ "username" => $this->username, 
                              "inputfield" => $inputField,
@@ -130,7 +132,9 @@ class User {
                              "configfield" => $configField,
                              "conversiontype" => $conversionType,
                              "comment" => $comment,
-                             "output" => $output]);
+                             "output" => $output, 
+                             "config" => $config, 
+                             "input" => $input]);
         } catch(PDOException $e) {
             echo $e->getMessage();
             $this->database->getConnection()->rollBack();
@@ -142,7 +146,7 @@ class User {
 
     public function selectConversionHistory($version) {
         try {
-            $sql = "SELECT output FROM ProfileHistory WHERE version = :version AND username = :username";
+            $sql = "SELECT * FROM ProfileHistory WHERE version = :version AND username = :username";
             $stmt = $this->database->getConnection()->prepare($sql);
             $stmt->execute([ "username" => $this->username, 
                              "version" => $version]);

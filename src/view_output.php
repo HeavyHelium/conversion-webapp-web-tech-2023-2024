@@ -9,8 +9,8 @@ require_once("../classes/user.php");
 session_start();
 
 $user = new User($_SESSION["username"]);
-
 $res = $user->selectConversionHistory($_POST["version"]);
+
 
 ?>
 
@@ -18,7 +18,17 @@ $res = $user->selectConversionHistory($_POST["version"]);
 
 <?php 
     if($res["success"]) {
-        echo '<textarea>' .  $res['data']['output'] . '</textarea>';
+        if(isset($_POST['output']) && $_POST["output"]) {
+            echo '<textarea>' .  $res['data']['output'] . '</textarea>';    
+            $_POST['output'] = null;
+        } else if(isset($_POST['input']) && $_POST["input"]){
+            echo '<textarea>' .  $res['data']['input'] . '</textarea>';    
+            $_POST['input'] = null;
+        } else if(isset($_POST['config']) && $_POST["config"]){
+            echo '<textarea>' .  $res['data']['config'] . '</textarea>';    
+            $_POST['config'] = null;
+        }
+        
     } else {
         echo "Something went wrong with getting the output...";
     }

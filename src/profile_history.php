@@ -10,7 +10,7 @@ $user = new User($_SESSION["username"]);
 $profile_data = $user->historyUserQuery();
 
 $columns = ["inputField", "configField", "outputField", "version", 
-            "conversionType", "comment", "output"];
+            "conversionType", "comment", "output", "config", "input"];
 
 if(!$profile_data["success"]) {
     header("Location: ./profile.php");
@@ -26,19 +26,35 @@ if(!$profile_data["success"]) {
     echo "</tr>";
 
     foreach ($resultArray as $row) {
-        echo "<form method='post' action='./view_output.php'>";
+        
         echo "<tr>";
         foreach ($columns as $header) {
             if ($header == "output") {
+                echo "<form method='post' action='./view_output.php'>";
+                echo "<input type='hidden' name='output' value='" . "true" . "' />";
                 echo "<input type='hidden' name='version' value='" . $row['version'] . "' />";
+                echo "<td><input class='button-view' type='submit' value='View Output'></td>";
+                echo "</form>";
+            } else if($header == "input") {
+                echo "<form method='post' action='./view_output.php'>";
+                echo "<input type='hidden' name='input' value='" . "true" . "' />";
+                echo "<input type='hidden' name='version' value='" . $row['version'] . "' />";
+                echo "<td><input class='button-view' type='submit' value='View Input'></td>";
+                echo "</form>";
+            } else if($header == "config") {
+                echo "<form method='post' action='./view_output.php'>";
+                echo "<input type='hidden' name='config' value='" . "true" . "' />";
+                echo "<input type='hidden' name='version' value='" . $row['version'] . "' />";
+                echo "<td><input class='button-view' type='submit' value='View Config'></td>";
+                echo "</form>";
             } else {
                 echo "<td>" . $row[$header] . "</td>";
             }
         }
 
-        echo "<td><input class='button-view' type='submit' value='View Output'></td>";
+        
         echo "</tr>";
-        echo "</form>";
+
     }
 
     echo "</table>";

@@ -98,18 +98,20 @@ if(!isset($_POST[$configArea]) || strlen($_POST[$configArea]) == 0) {
             // var_dump($_SESSION['conversionType']);
             // var_dump($_SESSION['successfulConversion']);
 
-            // var_dump($_SESSION['output-converted']);
+            // var_dump($_SESSION['output-converted']);)
 
             $user = new User($_SESSION["username"]);
             
             if(isset($_SESSION["successfulConversion"]) && 
             $_SESSION["successfulConversion"]) {
                     $user->insertConversionHistory($areas_nums[$_SESSION['input']], 
-                                                $areas_nums[$_SESSION['output']], 
-                                                $areas_nums[$_SESSION['configArea']],
-                                                $_SESSION["conversionType"], 
-                                                $_SESSION["comment"], 
-                                                $_SESSION["output-converted"]);
+                                                   $areas_nums[$_SESSION['output']], 
+                                                   $areas_nums[$_SESSION['configArea']],
+                                                   $_SESSION["conversionType"], 
+                                                   $_SESSION["comment"], 
+                                                   $_SESSION["output-converted"], 
+                                                   $area_enc[$in], $_POST[$configArea]);
+            
                 header("Location: ../src/profile.php");
             }
         }
