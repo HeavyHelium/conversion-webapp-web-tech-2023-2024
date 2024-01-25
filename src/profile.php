@@ -78,6 +78,12 @@ function clearConvData() {
         // $_SESSION['successfulConversion'] = true;
     
     ?>
+    <label class="warning"><?php
+            if(isset($_SESSION["config-warning"]) && $_SESSION["config-warning"]) {
+                echo $_SESSION["config-warning"];
+                $_SESSION["config-warning"] = null;
+            }
+        ?></label>
     
     <label for="textArea1">Area 1: <?php echo $area_1?></label>
         <textarea id="textArea1" name="textArea1" rows="4" cols="50" placeholder="<?php echo $area_1_placeholder?>"><?php
@@ -129,12 +135,7 @@ function clearConvData() {
                 $_SESSION["config-error"] = null;
             }?></label>
 
-        <label class="warning"><?php
-            if(isset($_SESSION["config-warning"]) && $_SESSION["config-warning"]) {
-                echo $_SESSION["config-warning"];
-                $_SESSION["config-warning"] = null;
-            }
-        ?></label>
+        
 
         <button type="submit" name="submit">Convert</button>
     </form>
