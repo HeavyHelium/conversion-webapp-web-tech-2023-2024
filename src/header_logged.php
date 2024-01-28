@@ -6,6 +6,10 @@
     <title>WebConv</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <script
+      src="https://kit.fontawesome.com/bfe600b337.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="../js/script.js" defer></script>
 </head>
 <body>

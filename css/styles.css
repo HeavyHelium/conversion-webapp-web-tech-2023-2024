@@ -230,3 +230,33 @@ td {
 #upload-div {
     margin-bottom: 2px;
 }
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    background: papayawhip;
+    padding-left: 3px;
+    padding-right: 3px;
+    border: 3px solid #333;
+    height: 2vw;
+    align-items: center;
+}
+
+.input-group-text {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.view-section .input-group {
+    font-size: 1.5vw;
+    margin-bottom: 5px;
+}
+.view-section .notafication {
+    font-size: 1vw;
+}
+
+
+.notafication {
+    font-style: italic;
+    color: #d7a9a9;
+}

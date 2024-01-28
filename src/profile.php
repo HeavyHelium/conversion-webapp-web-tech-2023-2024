@@ -85,7 +85,7 @@ function clearConvData() {
             }
         ?></label>
     
-    <label for="textArea1">Area 1: <?php echo $area_1?></label>
+    <label class="input-group" for="textArea1">Area 1: <?php echo $area_1?> <span class="input-group-text" onclick="copyToClipboard('textArea1')"><i class="fas fa-copy"></i></span></label>
         <textarea id="textArea1" name="textArea1" rows="4" cols="50" placeholder="<?php echo $area_1_placeholder?>"><?php
             if(isset($_SESSION["output-converted"]) && 
                $_SESSION["output-converted"] && 
@@ -94,11 +94,11 @@ function clearConvData() {
                 clearConvData();
             }
             ?></textarea>
-        <!-- <label class="upload" for="upload1">Load file</label> -->
+
+        <div id="notafication_textArea1" class="notafication"></div>
         <input id="upload1" type="file" name="uploadArea1">
 
-
-        <label for="textArea2">Area 2: <?php echo $area_2?><?php ?></label>
+        <label class="input-group" for="textArea2">Area 2: <?php echo $area_2?> <span class="input-group-text" onclick="copyToClipboard('textArea2')"><i class="fas fa-copy"></i></span></label>
         <textarea id="textArea2" rows="4" name="textArea2" cols="50" placeholder="<?php echo $area_2_placeholder?>"><?php
         if(isset($_SESSION["output-converted"]) && 
             $_SESSION["output-converted"] && 
@@ -107,10 +107,10 @@ function clearConvData() {
             clearConvData();
         }
         ?></textarea>
-        <!-- <label class="upload" for="upload2">Load file</label> -->
+        <div id="notafication_textArea2" class="notafication"></div>
         <input id="upload2" type="file" name="uploadArea2">
 
-        <label for="textArea3">Area 3: <?php echo $area_3?></label>
+        <label class="input-group" for="textArea3">Area 3: <?php echo $area_3?> <span class="input-group-text" onclick="copyToClipboard('textArea3')"><i class="fas fa-copy"></i></span></label>
         <textarea id="textArea3" rows="4" name="textArea3" cols="50" placeholder="<?php echo $area_3_placeholder?>"><?php
             
             if(isset($_SESSION["output-converted"]) && 
@@ -120,12 +120,12 @@ function clearConvData() {
                 clearConvData();
             }?></textarea>
 
-        <!-- <label class="upload" for="upload3">Load file</label> -->
+        <div id="notafication_textArea3" class="notafication"></div>
         <input id="upload3" type="file" name="uploadArea3">
 
-        <label for="textArea4">Comment</label>
+        <label class="input-group" for="textArea4">Comment <span class="input-group-text" onclick="copyToClipboard('textArea4')"><i class="fas fa-copy"></i></span></label>
         <textarea id="textArea4" rows="4" cols="50" name="commentArea" placeholder="...any comment on the coversion"></textarea>
-
+        <div id="notafication_textArea4" class="notafication"></div>
 
         <div></div>
 
