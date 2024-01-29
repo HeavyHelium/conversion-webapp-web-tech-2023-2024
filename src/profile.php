@@ -20,7 +20,9 @@ $area_1_placeholder = "";
 $area_2_placeholder = "";
 $area_3_placeholder = "";
 
-$config_placeholder = "input_format=properties (json) \noutput_format=json (properties)\nin=input_field\nout=output_field\nconfig=config_field\nskip_transform=true";
+
+
+$config_placeholder = "input_format=properties (json) \noutput_format=json (properties)\nin=input_field\nout=output_field\nconfig=config_field\nskip_transform=true\ntransform.k.type=key\ntransform.k.key_apply=true\ntransform.k.value_apply=true\ntransform.k.all=true";
 
 $config_name = "config(in properties format)";
 $areas_nums = ["textArea1" => 1, "textArea2" => 2, "textArea3" => 3];
@@ -82,6 +84,7 @@ function clearConvData() {
             if(isset($_SESSION["config-warning"]) && $_SESSION["config-warning"]) {
                 echo $_SESSION["config-warning"];
                 $_SESSION["config-warning"] = null;
+                // var_dump($_SESSION["transform"]);
             }
         ?></label>
     

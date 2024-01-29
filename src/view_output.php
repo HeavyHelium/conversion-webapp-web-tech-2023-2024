@@ -21,15 +21,15 @@ $res = $user->selectConversionHistory($_POST["version"]);
 <?php 
     if($res["success"]) {
         if(isset($_POST['output']) && $_POST["output"]) {
-            echo '<label class="input-group" for="ouputView">Content <span class="input-group-text" onclick="copyToClipboard(\'outputView\')"><i class="fas fa-copy"></i></span></label>';
+            echo '<label class="input-group" for="ouputView">' . 'Output' . '<span class="input-group-text" onclick="copyToClipboard(\'outputView\')"><i class="fas fa-copy"></i></span></label>';
             echo '<textarea id="outputView">' .  $res['data']['output'] . '</textarea>';    
             $_POST['output'] = null;
         } else if(isset($_POST['input']) && $_POST["input"]){
-            echo '<label class="input-group" for="ouputView">Content <span class="input-group-text" onclick="copyToClipboard(\'outputView\')"><i class="fas fa-copy"></i></span></label>';
+            echo '<label class="input-group" for="ouputView">'. 'Input' . '<span class="input-group-text" onclick="copyToClipboard(\'outputView\')"><i class="fas fa-copy"></i></span></label>';
             echo '<textarea id="outputView">' .  $res['data']['input'] . '</textarea>';    
             $_POST['input'] = null;
         } else if(isset($_POST['config']) && $_POST["config"]){
-            echo '<label class="input-group" for="ouputView">Content <span class="input-group-text" onclick="copyToClipboard(\'outputView\')"><i class="fas fa-copy"></i></span></label>';
+            echo '<label class="input-group" for="ouputView">' . 'Config'. '<span class="input-group-text" onclick="copyToClipboard(\'outputView\')"><i class="fas fa-copy"></i></span></label>';
             echo '<textarea id="outputView">' .  $res['data']['config'] . '</textarea>';    
             $_POST['config'] = null;
         }

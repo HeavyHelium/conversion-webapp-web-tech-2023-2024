@@ -10,7 +10,7 @@ upload1.addEventListener("change", () => {
     fr.readAsText(upload1.files[0]);
 
     fr.onload = function() {
-        area1.value = fr.result; // Use 'value' instead of 'innerHTML'
+        area1.value = fr.result; 
     };
 });
 
@@ -19,7 +19,7 @@ upload2.addEventListener("change", () => {
     fr.readAsText(upload2.files[0]);
 
     fr.onload = function() {
-        area2.value = fr.result; // Use 'value' instead of 'innerHTML'
+        area2.value = fr.result;
     };
 });
 
@@ -28,7 +28,7 @@ upload3.addEventListener("change", () => {
     fr.readAsText(upload3.files[0]);
 
     fr.onload = function() {
-        area3.value = fr.result; // Use 'value' instead of 'innerHTML'
+        area3.value = fr.result; 
     };
 });
 

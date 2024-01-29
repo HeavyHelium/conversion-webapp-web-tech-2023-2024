@@ -21,8 +21,9 @@ class ObjectConverter
 
     public static function toJson($object)
     {
-        return json_encode($object, JSON_PRETTY_PRINT);
+        return json_encode($object, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
     }
+
 }
 
 

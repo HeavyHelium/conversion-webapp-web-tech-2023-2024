@@ -4,6 +4,7 @@ require_once "testInputUtility.php";
 require_once "../classes/properties_parser.php";
 require_once "../classes/converter.php";
 require_once "../classes/user.php";
+require_once "../classes/transform.php";
 
 session_start();
 
@@ -60,26 +61,40 @@ if(!isset($_POST[$configArea]) || strlen($_POST[$configArea]) == 0) {
             $_SESSION['config-error'] = "You have to specify the output format value by setting the 'output_format' property!\n'output_format' is one of{json, properties}";
             header("Location: ../src/profile.php");
         } else {
-            if(count($content_config) != 4) {
-                $_SESSION['config-warning'] = "Transformations skipped! To be added in future release!";
-            }
+            // if(count($content_config) != 4) {
+            //     $_SESSION['config-warning'] = "Transformations skipped! To be added in future release!";
+            // }
 
-            if($input_format != $output_format) {
-                if($input_format == 'json') {
-                    $area_enc[$in] = str_replace('&quot;', '"',$area_enc[$in]);
-                    $parsed = json_decode($area_enc[$in], true);
-                    
+            if($input_format == 'json') {
+                $area_enc[$in] = str_replace('&quot;', '"',$area_enc[$in]);
+                $parsed = json_decode($area_enc[$in], true);
+                $parsed = applyTransformations($parsed, $content_config['transform']);  
+                              
+                if($input_format != $output_format) {
+
                     $_SESSION["output-converted"] = ObjectConverter::toProperties($parsed);
                     $_SESSION["conversionType"] = 'json2properties';
                 } else {
-                    $parsed = PropertiesParser::parseString($area_enc[$in]);
+                    $_SESSION["output-converted"] = ObjectConverter::toJson($parsed);
+                    $_SESSION["conversionType"] = 'json2json';
+                }
+                // $parsed = applyTransformations($parsed, $content_config['transform']);     
+            } else {
+                $parsed = PropertiesParser::parseString($area_enc[$in]);
+                $parsed = applyTransformations($parsed, $content_config['transform']);
+                if($input_format != $output_format) {
+                    
                     $_SESSION["output-converted"] = ObjectConverter::toJson($parsed);
                     $_SESSION["conversionType"] = 'properties2json';
+                } else {
+                    $_SESSION["output-converted"] = ObjectConverter::toProperties($parsed);
+                    $_SESSION["conversionType"] = 'properties2properties';
                 }
-            } else {
-                $_SESSION["output-converted"] = $area_enc[$in];
-                $_SESSION["conversionType"] = $input_format . "2" . $input_format;
+
+                // applyTransformations($parsed, $content_config['transform']);
             }
+        }
+            $_SESSION['transformations'] = $content_config['transform'];
             // var_dump($area_names_rev[$out]);
             $_SESSION['input'] = $area_names_rev[$in];
             $_SESSION['output'] = $area_names_rev[$out];
@@ -114,9 +129,7 @@ if(!isset($_POST[$configArea]) || strlen($_POST[$configArea]) == 0) {
             
                 header("Location: ../src/profile.php");
             }
-        }
-    
-    } catch (Exception $e) {
+        } catch (Exception $e) {
          $_SESSION['config-error'] = "Problem with parsing config area!" . $e->getMessage();
          header("Location: ../src/profile.php");
     }
