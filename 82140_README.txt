@@ -1,8 +1,4 @@
----Втора чернова на проекта---
-
----Функционалности за добавяне---
-(1) oпции за трансформации
-
+---Финална версия на проекта---
 
 ---Стартиране---
 * стартираме XAMPP сървър
@@ -16,12 +12,15 @@
 ---Структура на архива---
 
 .
+├── 82140_documentation.pdf
 ├── 82140_README.txt
 ├── classes
 │   ├── converter.php
 │   ├── db_handler.php
 │   ├── properties_parser.php
-│   └── user.php
+│   ├── transform.php
+│   ├── user.php
+│   └── writing_script_converter.php
 ├── config
 │   ├── config.ini
 │   ├── db_data.sql
@@ -40,16 +39,15 @@
 ├── index.php
 ├── js
 │   └── script.js
-├── README.md
 ├── sample_files
 │   ├── quiz.json
 │   └── quiz.properties
 └── src
     ├── footer.php
-    ├── view_output.php
     ├── header_logged.php
     ├── header.php
     ├── login.php
     ├── profile_history.php
     ├── profile.php
-    └── signup.php
+    ├── signup.php
+    └── view_output.php
