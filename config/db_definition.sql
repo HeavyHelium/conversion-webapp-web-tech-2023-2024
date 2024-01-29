@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Време на генериране: 24 яну 2024 в 21:31
+-- Време на генериране: 29 яну 2024 в 21:43
 -- Версия на сървъра: 10.4.28-MariaDB
 -- Версия на PHP: 8.2.4
 
@@ -35,7 +35,9 @@ CREATE TABLE `ProfileHistory` (
   `version` datetime NOT NULL,
   `conversionType` varchar(50) DEFAULT NULL CHECK (`conversionType` in ('json2json','json2properties','properties2json','properties2properties')),
   `comment` varchar(500) DEFAULT NULL,
-  `output` mediumtext DEFAULT NULL
+  `output` mediumtext DEFAULT NULL,
+  `input` mediumtext DEFAULT NULL,
+  `config` mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
