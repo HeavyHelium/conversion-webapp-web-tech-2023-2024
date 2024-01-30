@@ -76,6 +76,9 @@ if(!isset($_POST[$configArea]) || strlen($_POST[$configArea]) == 0) {
                     $_SESSION["conversionType"] = 'json2properties';
                 } else {
                     $_SESSION["output-converted"] = ObjectConverter::toJson($parsed);
+                    $_SESSION["output-converted"] = $_SESSION["output-converted"] == '[]' || 
+                                                    $_SESSION["output-converted"] == "null"  || 
+                                                    !($_SESSION['output-converted'])? "" : $_SESSION["output-converted"];
                     $_SESSION["conversionType"] = 'json2json';
                 }
                 // $parsed = applyTransformations($parsed, $content_config['transform']);     
@@ -85,6 +88,9 @@ if(!isset($_POST[$configArea]) || strlen($_POST[$configArea]) == 0) {
                 if($input_format != $output_format) {
                     
                     $_SESSION["output-converted"] = ObjectConverter::toJson($parsed);
+                    $_SESSION["output-converted"] = $_SESSION["output-converted"] == '[]' || 
+                                                    $_SESSION["output-converted"] == "null"  || 
+                                                    !($_SESSION['output-converted'])? "" : $_SESSION["output-converted"];
                     $_SESSION["conversionType"] = 'properties2json';
                 } else {
                     $_SESSION["output-converted"] = ObjectConverter::toProperties($parsed);
